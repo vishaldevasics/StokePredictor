@@ -1,0 +1,108 @@
+.App{
+    height: 90vh;
+    width: 100vw;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+}
+.App-header{
+    width: 50vw;
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form{
+    background: #ffffff; /* White background for the form */
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    /* max-width: 600px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 5vh;
+}
+button {
+    background-color: #4caf50; /* Green color for the submit button */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+input,select{
+    margin-left: 5px;
+}
+h1 {
+    color: #4caf50; /* Green color for the heading */
+    /* font-size: 2em; */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  label {
+    font-weight: bold;
+    color: #333;
+  }
+  .low{
+    color: #4caf50;
+    font-size: large;
+  }
+  .high{
+    color: red;
+    font-weight: 700;
+  }
+.headsub{
+  text-align: center;
+  font-size: large;
+  color: rgb(212, 87, 45);
+}
+
+.btn_chat{
+  background-color: #4caf50; /* Green color for the submit button */
+  /* position: fixed; */
+
+}
+
+/* Add to App.css */
+.report-container {
+  background: white;
+  color: black;
+  padding: 24px;
+  max-width: 720px;
+  margin: 2rem auto;
+  border-radius: 16px;
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: 1.75rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.download-btn {
+  margin-top: 1rem;
+  padding: 12px 24px;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.download-btn:hover {
+  background-color: #1d4ed8;
+}
