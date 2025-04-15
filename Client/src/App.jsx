@@ -10,7 +10,7 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1>Heart Stroke Predictor</h1>
+    
           <Routes>
             <Route path="/" element={<Navigate to="/auth" />} />
             <Route path="/auth" element={<LoginSignup />} />
