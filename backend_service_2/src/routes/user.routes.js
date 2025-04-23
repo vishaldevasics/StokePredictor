@@ -25,7 +25,7 @@ router.route("/logout").post(verifyJWT, logoutUser)
 router.route("/refresh-token").post(refreshAccessToken)
 
 
-router.route("/uploadassignment").post(upload.fields([
+router.route("/uploadReport").post(upload.fields([
   {
     name: "assignmentFile",
     maxCount: 1,

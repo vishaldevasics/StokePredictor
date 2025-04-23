@@ -64,8 +64,8 @@ const HealthForm = () => {
                 label: "Gender",
                 name: "gender",
                 options: [
-                  { val: 0, label: "Male" },
-                  { val: 1, label: "Female" },
+                  { val: 1, label: "Male" },
+                  { val: 0, label: "Female" },
                 ],
               },
               {

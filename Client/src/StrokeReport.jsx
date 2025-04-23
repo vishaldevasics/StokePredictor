@@ -8,82 +8,73 @@ const StrokeReport = ({ report }) => {
     let x = 10;
     let y = 10;
     const lineHeight = 10;
-    const pageWidth = doc.internal.pageSize.getWidth();
     const margin = 10;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
     const maxLineWidth = pageWidth - margin * 2;
-
-    // Split the report into separate lines by newline character.
+  
+    const checkPageSpace = (linesNeeded) => {
+      if (y + linesNeeded * lineHeight > pageHeight - margin) {
+        doc.addPage();
+        y = margin;
+      }
+    };
+  
+    const addText = (text, font = "normal", size = 12, indent = 0) => {
+      doc.setFont("helvetica", font);
+      doc.setFontSize(size);
+      const splitted = doc.splitTextToSize(text, maxLineWidth - indent);
+      checkPageSpace(splitted.length);
+      doc.text(splitted, x + indent, y);
+      y += splitted.length * lineHeight + 2;
+    };
+  
+    const addHorizontalLine = () => {
+      checkPageSpace(1);
+      doc.setLineWidth(0.5);
+      doc.line(x, y, pageWidth - margin, y);
+      y += lineHeight * 0.5;
+    };
+  
     const lines = report.split("\n").filter((line) => line.trim() !== "");
-
+  
     lines.forEach((rawLine) => {
       const line = rawLine.trim();
-
-      // Check for a horizontal rule (e.g., ---)
+  
       if (line.startsWith("---")) {
-        doc.setLineWidth(0.5);
-        doc.line(x, y, pageWidth - margin, y);
-        y += lineHeight * 0.5;
+        addHorizontalLine();
         return;
       }
-
-      // Heading with ** … ** and not a field label
+  
+      // Heading (** … **) without colon
       if (line.startsWith("**") && line.endsWith("**") && !line.includes(":")) {
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(18);
-        const text = line.replace(/\*\*/g, "");
-        const splitted = doc.splitTextToSize(text, maxLineWidth);
-        doc.text(splitted, x, y);
-        y += splitted.length * lineHeight;
+        addText(line.replace(/\*\*/g, ""), "bold", 18);
         return;
       }
-
-      // Bold section titles or labels (assumed if enclosed in **…**)
+  
+      // Bold section titles or labels (**…**)
       if (line.startsWith("**") && line.endsWith("**")) {
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(14);
-        const text = line.replace(/\*\*/g, "");
-        const splitted = doc.splitTextToSize(text, maxLineWidth);
-        doc.text(splitted, x, y);
-        y += splitted.length * lineHeight;
+        addText(line.replace(/\*\*/g, ""), "bold", 14);
         return;
       }
-
-      // Markdown header level 3 (e.g., ### …)
+  
+      // Markdown header level 3 (### …)
       if (line.startsWith("###")) {
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(16);
-        const text = line.replace(/###\s*/, "");
-        const splitted = doc.splitTextToSize(text, maxLineWidth);
-        doc.text(splitted, x, y);
-        y += splitted.length * lineHeight;
+        addText(line.replace(/###\s*/, ""), "bold", 16);
         return;
       }
-
-      // Bullet points (lines that start with '-' or '- ')
+  
+      // Bullet points (- …)
       if (line.startsWith("-")) {
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(12);
-        // Indent bullet items
-        const bulletX = x + 5;
-        const text = line;
-        const splitted = doc.splitTextToSize(text, maxLineWidth - 5);
-        doc.text(splitted, bulletX, y);
-        y += splitted.length * lineHeight;
+        addText(line, "normal", 12, 5);
         return;
       }
-
-      // Otherwise treat as normal paragraph text
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(12);
-      const splitted = doc.splitTextToSize(line, maxLineWidth);
-      doc.text(splitted, x, y);
-      y += splitted.length * lineHeight;
-
-      // Add space between paragraphs if needed
-      y += 2;
+  
+      // Normal paragraph
+      addText(line, "normal", 12);
     });
-
-    doc.save("code.pdf");
+  
+    doc.save("stroke-report.pdf");
   };
 
   if (!report) return null;
