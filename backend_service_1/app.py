@@ -5,7 +5,9 @@ import pickle
 import os
 from pymongo import MongoClient
 from bson import ObjectId
-
+from dotenv import load_dotenv
+load_dotenv()
+mongo_uri = os.getenv("MONGO_URI")
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -15,7 +17,7 @@ model_path = os.path.join(os.path.dirname(__file__), 'RandomForest.pkl')
 model = pickle.load(open(model_path, 'rb'))
 
 # Connect to MongoDB (localhost by default)
-client = MongoClient("mongodb+srv://vishaldevasics:EKgT3eIxB0Vdgrni@cluster0.ie8do6z.mongodb.net/")  # Replace with your URI if hosted
+client = MongoClient(mongo_uri)  # Replace with your URI if hosted
 db = client['strokepredictor']
 collection = db['predictions']
 

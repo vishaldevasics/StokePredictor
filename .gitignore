@@ -1,0 +1,45 @@
+# Ignore .env files for all services
+**/.env
+
+# Python
+backend_service_1/__pycache__/
+backend_service_1/*.pyc
+backend_service_1/*.pyo
+backend_service_1/*.pyd
+backend_service_1/.Python
+backend_service_1/.env
+backend_service_1/venv/
+backend_service_1/.venv/
+backend_service_1/ENV/
+backend_service_1/.envrc
+backend_service_1/.mypy_cache/
+backend_service_1/.pytest_cache/
+backend_service_1/.coverage
+backend_service_1/coverage.xml
+backend_service_1/htmlcov/
+
+# Node.js
+backend_service_2/node_modules/
+backend_service_2/npm-debug.log*
+backend_service_2/yarn-debug.log*
+backend_service_2/yarn-error.log*
+backend_service_2/pnpm-debug.log*
+backend_service_2/.env
+
+# React Client
+client/node_modules/
+client/.parcel-cache/
+client/.next/
+client/.turbo/
+client/build/
+client/dist/
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/.eslintcache
+client/.env
+
+
+# System Files
+.DS_Store
+Thumbs.db
